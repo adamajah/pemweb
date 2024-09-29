@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kentung Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Times New Roman', Times, serif;
+            background-image: url('https://static.vecteezy.com/system/resources/previews/024/993/806/non_2x/superhero-shoot-spider-web-through-the-cityscape-background-free-vector.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        h1 {
+            color: #f3bd0a;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            margin: 20px 0;
+            animation: swing 1s ease infinite;
+            color: #fa9009;
+        }
+
+        .product-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+            width: 80%;
+        }
+
+        .product {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .product:hover {
+            transform: scale(1.05);
+        }
+
+        .product img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+        .product h2 {
+            font-size: 20px;
+            color: #333;
+        }
+
+        .product .price {
+            color: #f3bd0a;
+            font-weight: bold;
+        }
+
+        .product button {
+            background-color: #f3bd0a;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .product button:hover {
+            background-color: #d39e08;
+        }
+
+        /* Styling untuk keranjang */
+        .cart {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            width: 80%;
+            text-align: left;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .cart h2 {
+            margin-bottom: 10px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        /* Tambahan styling untuk tombol checkout */
+        .checkout-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 50px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .checkout-button:hover {
+            background-color: #218838;
+        }
+
+        /* Styling untuk halaman checkout */
+        .checkout-form {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 500px;
+            text-align: left;
+        }
+
+        .checkout-form input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .checkout-form button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .checkout-form button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Kentung Store</h1>
+
+    <div class="product-container">
+        <!-- Produk 1 -->
+        <div class="product" data-name="Produk 1" data-price="4500000">
+            <img src="https://images.tokopedia.net/img/cache/500-square/VqbcmM/2022/9/26/96ffb304-fde9-425b-8f62-6aa2684d300e.jpg"
+                alt="Produk 1">
+            <h2>Clase Azul</h2>
+            <p class="price">Rp4.500.000</p>
+            <button onclick="addToCart('Clase Azul', '4.500.000')">Tambah ke Keranjang</button>
+        </div>
+
+        <!-- Produk 2 -->
+        <div class="product" data-name="Produk 2" data-price="380000">
+            <img src="https://images.tokopedia.net/img/cache/700/VqbcmM/2022/4/28/16044d63-faa7-46e0-aa13-3fa4d67480b8.jpg"
+                alt="Produk 2">
+            <h2>Captain Morgan</h2>
+            <p class="price">Rp380.000</p>
+            <button onclick="addToCart('Captain Morgan', '380.000')">Tambah ke Keranjang</button>
+        </div>
+
+        <!-- Produk 3 -->
+        <div class="product" data-name="Produk 3" data-price="75000">
+            <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//102/MTA-44896025/kawa_kawa_kawa_kawa_anggur_hijau_600ml_full01_kg5lku6e.jpg"
+                alt="Produk 3">
+            <h2>Kawa-Kawa</h2>
+            <p class="price">Rp75.000</p>
+            <button onclick="addToCart('Kawa-Kawa', '75.000')">Tambah ke Keranjang</button>
+        </div>
+    </div>
+
+    <!-- Kontainer untuk keranjang -->
+    <div class="cart" id="cart">
+        <h2>Keranjang Belanja</h2>
+        <div id="cart-items"></div>
+        <p id="total-price">Total: Rp0</p>
+    </div>
+
+    <button class="checkout-button" onclick="goToCheckout()">
+        Lanjutkan Pembayaran <i class="fas fa-arrow-right"></i>
+    </button>
+
+    <script>
+        let cart = [];
+        let total = 0;
+
+        function addToCart(productName, productPriceString) {
+            const productPrice = Number(productPriceString.replace(/\./g, ''));
+            cart.push({ name: productName, price: productPrice });
+            total += productPrice;
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItemsDiv = document.getElementById('cart-items');
+            cartItemsDiv.innerHTML = '';
+            cart.forEach((item) => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'cart-item';
+                itemDiv.innerHTML = `<span>${item.name}</span><span>Rp ${item.price.toLocaleString('id-ID', { minimumFractionDigits: 0 })}</span>`;
+                cartItemsDiv.appendChild(itemDiv);
+            });
+
+            document.getElementById('total-price').innerText = `Total: Rp ${total.toLocaleString('id-ID', { minimumFractionDigits: 0 })}`;
+        }
+
+        function goToCheckout() {
+            const checkoutHtml = `
+                <h2>Checkout</h2>
+                <div class="checkout-form">
+                    <input type="text" placeholder="Nama Lengkap" required>
+                    <input type="email" placeholder="Email" required>
+                    <input type="text" placeholder="Alamat Pengiriman" required>
+                    <input type="text" placeholder="Nomor Telepon" required>
+                    <p>Total: Rp ${total.toLocaleString('id-ID', { minimumFractionDigits: 0 })}</p>
+                    <button onclick="confirmCheckout()">Konfirmasi Pembayaran</button>
+                </div>
+            `;
+            document.body.innerHTML = checkoutHtml + document.body.innerHTML;
+        }
+
+        function confirmCheckout() {
+            alert('Pembayaran berhasil! Terima kasih telah berbelanja di Kentung Store.');
+            location.reload(); // Mengembalikan ke halaman utama setelah konfirmasi
+        }
+    </script>
+</body>
+
+</html>
