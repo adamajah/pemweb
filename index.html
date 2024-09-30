@@ -63,7 +63,7 @@
 <body>
     <div class="button-container">
         <button onclick="showFrame('header')">
-            <i class="fa-solid fa-house"></i> <!-- Ikon header -->
+            <i class="fa-solid fa-house"></i>
         </button>
     </div>
 
@@ -73,26 +73,20 @@
         const frames = document.querySelectorAll('.frame');
 
         function showFrame(frameId) {
-            // Hide all frames
             frames.forEach((frame) => {
                 frame.classList.remove('show');
                 frame.classList.add('hide');
             });
 
-            // Show the selected frame
             const selectedFrame = document.getElementById(frameId);
             selectedFrame.classList.remove('hide');
             selectedFrame.classList.add('show');
         }
 
-        // Set current frame index to 0 as only header is available
         let currentFrameIndex = 0;
         const frameIds = ['header'];
 
         document.addEventListener('keydown', function (event) {
-            // Disable arrow key navigation since there's only one frame
-            // If you want to keep it, you can modify the logic accordingly
-            // For example, you might want to show an alert or do nothing on arrow key presses
         });
     </script>
 </body>
